@@ -20,7 +20,7 @@ public class UsuarioRepository
         await using var cn = new SqlConnection(_connectionString);
         await using var cmd = new SqlCommand(@"
             SELECT ID_UNICO_USUARIO, ID_ROL, NOMBRE_USUARIO, APELLIDO_USUARIO,
-                   CORREO_USUARIO, CLAVE_USUARIO,
+                   EMAIL_USUARIO, CLAVE_USUARIO,
                    FECHA_NACIMIENTO_USUARIO, TIPO_DOCUMENTO_USUARIO,
                    DOCUMENTO_USUARIO, FECHA_MODIFICACION_USUARIO, ESTADO_USUARIO
             FROM USUARIO", cn);
@@ -39,7 +39,7 @@ public class UsuarioRepository
         await using var cn = new SqlConnection(_connectionString);
         await using var cmd = new SqlCommand(@"
             SELECT ID_UNICO_USUARIO, ID_ROL, NOMBRE_USUARIO, APELLIDO_USUARIO,
-                   CORREO_USUARIO, CLAVE_USUARIO,
+                   EMAIL_USUARIO, CLAVE_USUARIO,
                    FECHA_NACIMIENTO_USUARIO, TIPO_DOCUMENTO_USUARIO,
                    DOCUMENTO_USUARIO, FECHA_MODIFICACION_USUARIO, ESTADO_USUARIO
             FROM USUARIO
@@ -58,11 +58,11 @@ public class UsuarioRepository
         await using var cn = new SqlConnection(_connectionString);
         await using var cmd = new SqlCommand(@"
             SELECT ID_UNICO_USUARIO, ID_ROL, NOMBRE_USUARIO, APELLIDO_USUARIO,
-                   CORREO_USUARIO, CLAVE_USUARIO,
+                   EMAIL_USUARIO, CLAVE_USUARIO,
                    FECHA_NACIMIENTO_USUARIO, TIPO_DOCUMENTO_USUARIO,
                    DOCUMENTO_USUARIO, FECHA_MODIFICACION_USUARIO, ESTADO_USUARIO
             FROM USUARIO
-            WHERE CORREO_USUARIO = @CORREO", cn);
+            WHERE EMAIL_USUARIO = @CORREO", cn);
 
         cmd.Parameters.Add("@CORREO", SqlDbType.VarChar, 200).Value = correo;
 
@@ -81,7 +81,7 @@ public class UsuarioRepository
             INSERT INTO USUARIO
             (
                 ID_UNICO_USUARIO, ID_ROL, NOMBRE_USUARIO, APELLIDO_USUARIO,
-                CORREO_USUARIO, CLAVE_USUARIO, FECHA_NACIMIENTO_USUARIO,
+                EMAIL_USUARIO, CLAVE_USUARIO, FECHA_NACIMIENTO_USUARIO,
                 TIPO_DOCUMENTO_USUARIO, DOCUMENTO_USUARIO,
                 FECHA_MODIFICACION_USUARIO, ESTADO_USUARIO
             )
@@ -122,7 +122,7 @@ public class UsuarioRepository
                 ID_ROL = @ROL,
                 NOMBRE_USUARIO = @NOMBRE,
                 APELLIDO_USUARIO = @APELLIDO,
-                CORREO_USUARIO = @CORREO,
+                EMAIL_USUARIO = @CORREO,
                 CLAVE_USUARIO = @CLAVE,
                 FECHA_NACIMIENTO_USUARIO = @FECHA_NAC,
                 TIPO_DOCUMENTO_USUARIO = @TIPO_DOC,
@@ -176,7 +176,7 @@ public class UsuarioRepository
         IdRol = dr.GetInt32(dr.GetOrdinal("ID_ROL")),
         Nombre = dr.IsDBNull(dr.GetOrdinal("NOMBRE_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("NOMBRE_USUARIO")),
         Apellido = dr.IsDBNull(dr.GetOrdinal("APELLIDO_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("APELLIDO_USUARIO")),
-        Correo = dr.IsDBNull(dr.GetOrdinal("CORREO_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("CORREO_USUARIO")),
+        Correo = dr.IsDBNull(dr.GetOrdinal("EMAIL_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("EMAIL_USUARIO")),
         Clave = dr.IsDBNull(dr.GetOrdinal("CLAVE_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("CLAVE_USUARIO")),
         FechaNacimiento = dr.IsDBNull(dr.GetOrdinal("FECHA_NACIMIENTO_USUARIO")) ? null : dr.GetDateTime(dr.GetOrdinal("FECHA_NACIMIENTO_USUARIO")),
         TipoDocumento = dr.IsDBNull(dr.GetOrdinal("TIPO_DOCUMENTO_USUARIO")) ? null : dr.GetString(dr.GetOrdinal("TIPO_DOCUMENTO_USUARIO")),
