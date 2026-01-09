@@ -27,6 +27,7 @@ public class PagosController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<PagoDto>>> GetAll()
     {
         var pagos = await _repository.ObtenerTodosAsync();
@@ -34,6 +35,7 @@ public class PagosController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<ActionResult<PagoDto>> GetById(int id)
     {
         var pago = await _repository.ObtenerPorIdAsync(id);

@@ -27,6 +27,7 @@ public class FacturasController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<FacturaDto>>> GetAll()
     {
         var facturas = await _repository.ObtenerTodasAsync();
@@ -34,6 +35,7 @@ public class FacturasController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<ActionResult<FacturaDto>> GetById(int id)
     {
         var factura = await _repository.ObtenerPorIdAsync(id);
