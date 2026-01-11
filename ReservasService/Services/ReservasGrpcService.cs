@@ -32,6 +32,7 @@ public class ReservasGrpcService : ReservasGrpc.ReservasGrpcBase
     }
 
     // ========== RESERVAS ==========
+    [AllowAnonymous] // Permitir acceso anónimo para el calendario
     public override async Task<ReservasResponse> ObtenerReservas(
     Empty request, ServerCallContext context)
     {
@@ -117,6 +118,7 @@ public class ReservasGrpcService : ReservasGrpc.ReservasGrpcBase
 
     // ========== HABXRES ==========
 
+    [AllowAnonymous] // Permitir acceso anónimo para el calendario
     public override async Task<HabxResListResponse> ObtenerHabxRes(
         Empty request, ServerCallContext context)
     {
