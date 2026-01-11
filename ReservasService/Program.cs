@@ -77,6 +77,9 @@ builder.Services.AddScoped<HabxResRepository>();
 builder.Services.AddScoped<DesxHabxResRepository>();
 builder.Services.AddScoped<HoldRepository>();
 
+// EventBus (usamos NullEventBus si no hay RabbitMQ configurado)
+builder.Services.AddSingleton<IEventBus, NullEventBus>();
+
 //
 // =======================
 // HealthCheck (recomendado)
