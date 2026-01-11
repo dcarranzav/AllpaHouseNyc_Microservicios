@@ -1,4 +1,5 @@
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Mvc;
 using ReservasService.Protos;
 
@@ -37,7 +38,13 @@ public class ReservasGrpcGatewayController : ControllerBase
         
         _logger.LogInformation("Connecting to gRPC service at: {Url}", grpcUrl);
         
-        var channel = GrpcChannel.ForAddress(grpcUrl);
+        // Usar GrpcWebHandler para compatibilidad con HTTP/1.1 (Render, Cloudflare, etc.)
+        var httpHandler = new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler());
+        var channel = GrpcChannel.ForAddress(grpcUrl, new GrpcChannelOptions
+        {
+            HttpHandler = httpHandler
+        });
+        
         return new ReservasGrpc.ReservasGrpcClient(channel);
     }
 

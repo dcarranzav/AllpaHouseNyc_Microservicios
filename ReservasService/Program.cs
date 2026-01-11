@@ -28,7 +28,8 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(int.Parse(port), listenOptions =>
     {
-        listenOptions.Protocols = HttpProtocols.Http2;
+        // Usar Http1AndHttp2 para compatibilidad con Render (TLS termination)
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
     });
 });
 
@@ -90,12 +91,14 @@ var app = builder.Build();
 // =======================
 app.UseAuthentication();
 app.UseAuthorization();
+// Habilitar gRPC-Web para compatibilidad con proxies HTTP/1.1 (Render, Cloudflare, etc.)
+app.UseGrpcWeb();
 
 //
 // =======================
 // Endpoints
 // =======================
-app.MapGrpcService<ReservasGrpcService>();
+app.MapGrpcService<ReservasGrpcService>().EnableGrpcWeb();
 
 app.MapHealthChecks("/health");
 
